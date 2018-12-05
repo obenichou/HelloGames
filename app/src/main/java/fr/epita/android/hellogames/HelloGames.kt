@@ -40,20 +40,17 @@ class HelloGames : AppCompatActivity() {
             override fun onResponse(call: Call<Game>, response: Response<Game>) {
                 if (response.code() == 200) {
                     val data:Game = response.body()!!
-                    setContentView(R.layout.details)
-                    val data_game: TextView? = findViewById(R.id.data_game!!)
-                    val details_game: TextView? = findViewById(R.id.details_game!!)
-                    val know_more: Button?= findViewById(R.id.know_more)
-                    data_game!!.setText("Name: " + data.name
-                            + "\nType: " + data.type
-                            + "\nNb Player: " + data.players.toString()
-                            + "\nYear: " + data.year.toString())
-                    details_game!!.setText(data.description_en)
-                    focusgame!!.setImageResource(gameFocus)
-                    know_more!!.setOnClickListener {
-                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(data.url))
-                        startActivity(browserIntent)
-                    }
+
+                    //
+                    val myIntent = Intent(this@HelloGames, DetailsActivity::class.java)
+                    myIntent.putExtra("id", data.id)
+                    myIntent.putExtra("name", data.name)
+                    myIntent.putExtra("type",data.type)
+                    myIntent.putExtra("players", data.players)
+                    myIntent.putExtra("url", data.url)
+                    myIntent.putExtra("year", data.year)
+                    myIntent.putExtra("description_en", data.description_en)
+                    startActivity(myIntent)
                 }
                 else {
                     Log.d("Response code", response.code().toString())

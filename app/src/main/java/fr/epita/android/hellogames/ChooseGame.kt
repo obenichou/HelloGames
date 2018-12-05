@@ -49,7 +49,7 @@ class ChooseGame {
                 }
             }
         }
- fun getImage(i: Int) : Int {
+ public fun getImage(i: Int) : Int {
      when (i) {
          1 -> return R.drawable.tictactoe
          2 -> return R.drawable.hangman
